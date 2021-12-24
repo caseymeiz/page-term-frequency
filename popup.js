@@ -12,8 +12,11 @@ chrome.runtime.onMessage.addListener(
 );
 
 function scrape() {
+    let text = document.getElementsByTagName("body")[0].innerText
+    let matches = [...text.matchAll(/\w+/g)]
+    let tokens = matches.map(m => m[0])
     chrome.runtime.sendMessage({
-        terms: document.getElementsByTagName("body")[0].innerText.split(/\s+/)
+        terms: tokens
     });
 }
 
